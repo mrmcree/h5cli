@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-stylus": "^2.7.0",
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "download-git-repo": "^1.1.0",
@@ -19,19 +16,11 @@
     "h5cli-init": "bin/h5cli-init"
   },
   "name": "@nicoyangcool/h5cli",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "description": "",
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mrmcree/h5cli.git"
