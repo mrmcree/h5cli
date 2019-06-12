@@ -4,6 +4,8 @@
 
 ## Install
 > npm install @nicoyangcool/h5-cli
-
 ## Usage
-> npm run build
+> h5cli add [template-name]
+> h5cli delete [template-name]
+> h5cli list
+> h5cli init [template-name] [project-name]

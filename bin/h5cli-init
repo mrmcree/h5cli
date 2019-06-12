@@ -116,7 +116,9 @@ const main = async () => {
     spinner.succeed();
     console.log("\n" + logSymbols.success, chalk.green("Generation completed!"));
     console.log("\n To get started");
-    console.log(`\n    cd ${projectName} \n`);
+    console.log(`\n    cd ${projectName} \n
+                  yarn install | npm install
+    `);
   });
 };
 main();
