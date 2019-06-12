@@ -8,7 +8,8 @@
     "download-git-repo": "^1.1.0",
     "inquirer": "^6.2.2",
     "ora": "^3.2.0",
-    "log-symbols": "3.0.0"
+    "log-symbols": "3.0.0",
+    "pug":"2.0.3"
   },
   "bin": {
     "h5cli": "bin/h5cli",

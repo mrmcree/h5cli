@@ -1,50 +1,122 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const chalk = require('chalk')
-const ora = require('ora')
-const download = require('download-git-repo')
-const tplObj = require(`${__dirname}/../template`)
+const program = require("commander");
+const chalk = require("chalk");
+const ora = require("ora");
+const download = require("download-git-repo");
+const tplObj = require(`${__dirname}/../template`);
+const logSymbols = require("log-symbols");
+const inquirer = require("inquirer");
+const pug = require("pug");
+const fs = require("fs");
+var confirmPath = function(pathStr) {
+  if (!fs.existsSync(pathStr)) {
+    fs.mkdirSync(pathStr);
+    console.log("createPath: " + pathStr);
+  }
+};
+const main = async () => {
+  program.usage("<template-name> [project-name]");
+  program.parse(process.argv);
 
-program
-  .usage('<template-name> [project-name]')
-program.parse(process.argv)
-// 当没有输入参数的时候给个提示
-if (program.args.length < 1) return program.help()
+  if (program.args.length < 1) return program.help();
 
-// 好比 vue init webpack project-name 的命令一样，第一个参数是 webpack，第二个参数是 project-name
-let templateName = program.args[0]
-let projectName = program.args[1]
-// 小小校验一下参数
-if (!tplObj[templateName]) {
-  console.log(chalk.red('\n 模板不存在 \n '))
-  return
-}
-if (!projectName) {
-  console.log(chalk.red('\n 项目名称不能为空 \n '))
-  return
-}
+  let templateName = program.args[0];
+  let projectName = program.args[1];
+  // 校验参数
+  if (!tplObj[templateName]) {
+    console.log("\n" + logSymbols.error, chalk.red("模板不存在 \n "));
+    return;
+  }
+  if (!projectName) {
+    console.log("\n" + logSymbols.error, chalk.red("项目名称不能为空 \n "));
+    return;
+  }
+  await confirmPath(`${__dirname}/../${projectName}`)
+  const promptList = [
+    {
+      type: "input",
+      message: "项目名",
+      name: "pagetitle",
+      default: "pagetitle" // 默认值
+    },
+    {
+      type: "input",
+      message: "屏幕尺寸",
+      name: "screen",
+      default: "750" // 默认值
+    },
+    // {
+    //   type: "confirm",
+    //   message: "是否需要es6",
+    //   name: "es6",
+    //   default: "yes" // 默认值
+    // },
+    {
+      type: "confirm",
+      message: "是否需要stylus",
+      name: "stylus",
+      default: "yes" // 默认值
+    },
+    {
+      type: "confirm",
+      message: "是否需要百度监测",
+      name: "bd",
+      default: "yes" // 默认值
+    },
+    {
+      type: "confirm",
+      message: "是否需要微信分享",
+      name: "wxshare",
+      default: "no"
+    },
+    {
+      type: "confirm",
+      message: "是否需要图片上传插件",
+      name: "img",
+      default: "yes" // 默认值
+    }
+  ];
+  await inquirer.prompt(promptList).then(answers => {
+    console.log(logSymbols.success, chalk.green(`结果 ${[...Object.values(answers)]}`)); // 返回的结果
+    var html = pug.renderFile(`${__dirname}/../index.pug`, answers);
+    fs.writeFile(`${__dirname}/../${projectName}/index.html`, html, function(err) {
+      if (err) throw err;
+    });
+    if (answers.stylus) {
+      let option = {
+        dependencies: {
+          gulp: "^4.0.2",
+          "gulp-autoprefixer": "^6.1.0",
+          "gulp-stylus": "^2.7.0"
+        },
+        browserslist: ["> 1%", "last 2 versions", "not ie <= 8"]
+      };
 
-url = tplObj[templateName]
+      fs.writeFile(`${__dirname}/../${projectName}/package.json`, JSON.stringify(option), function(err) {
+        if (err) throw err;
+      });
+    }
+  });
 
-console.log(chalk.white('\n Start generating... \n'))
-// 出现加载图标
-const spinner = ora("下载中...");
-spinner.start();
-// 执行下载方法并传入参数
-download (
-  url,
-  projectName,
-  err => {
+  url = tplObj[templateName];
+
+  console.log(chalk.white("\n Start generating... \n"));
+  // 出现加载图标
+  const spinner = ora("下载中...");
+  spinner.start();
+  // 执行下载方法并传入参数
+  await download(url, projectName, err => {
     if (err) {
       spinner.fail();
-      console.log(chalk.red(`Generation failed. ${err}`))
-      return
+      console.log(logSymbols.error, chalk.red(`Generation failed. ${err}`));
+      return;
     }
     // 结束加载图标
     spinner.succeed();
-    console.log(chalk.green('\n Generation completed!'))
-    console.log('\n To get started')
-    console.log(`\n    cd ${projectName} \n`)
-  }
-)
+    console.log("\n" + logSymbols.success, chalk.green("Generation completed!"));
+    console.log("\n To get started");
+    console.log(`\n    cd ${projectName} \n`);
+  });
+};
+main();
