@@ -8,6 +8,8 @@ html(lang='en')
         meta(name='format-detection', content='telephone=no')
         meta#viewport(name='viewport', content='width='+screen+',user-scalable=no,target-densitydpi=device-dpi')
         title #{pagetitle}
+        if swiper
+            link(rel="stylesheet", href="css/swiper.min.css")
         link(rel='stylesheet', href='css/style.css')
     body
         script(src='js/jquery-1.js')
@@ -20,6 +22,8 @@ html(lang='en')
         if img
             script(src='js/exif.js')
             script(src='js/imgslter.js')
+        if swiper
+            script(src='js/swiper.min.js')
         if bd
             script.
                 var myURL = Track.parseURL(location.href);
