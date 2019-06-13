@@ -86,7 +86,7 @@ const main = async () => {
   await inquirer.prompt(promptList).then(answers => {
     console.log(logSymbols.success, chalk.green(`结果 ${[...Object.values(answers)]}`)); // 返回的结果
     var html = pug.renderFile(`${__dirname}/../index.pug`, answers);
-    fs.writeFile(`${__dirname}/../${projectName}/index.html`, html, function(err) {
+    fs.writeFile(`${__dirname}/../${projectName}/src/index.html`, html, function(err) {
       if (err) throw err;
     });
     if (answers.stylus) {
