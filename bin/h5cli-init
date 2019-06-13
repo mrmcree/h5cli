@@ -33,6 +33,7 @@ const main = async () => {
     return;
   }
   await confirmPath(`${__dirname}/../${projectName}`);
+  await confirmPath(`${__dirname}/../${projectName}/src`);
   const promptList = [
     {
       type: "input",
