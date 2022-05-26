@@ -5,7 +5,7 @@
 
 ## Install
 
-> npm install @mrmcree/h5-cli
+> npm install @mrmcree/h5cli
 
 ## Usage
 
