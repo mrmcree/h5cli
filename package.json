@@ -21,7 +21,7 @@
     "h5cli-init": "bin/h5cli-init"
   },
   "name": "@mrmcree/h5cli",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "devDependencies": {},
   "author": "mrmcree",
   "license": "ISC",
