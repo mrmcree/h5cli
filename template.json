@@ -1,3 +1,5 @@
 {
-    "h5": "mrmcree/template"
+	"h5": "mrmcree/template",
+	"vite-vant": "mrmcree/vite-vant-vue3",
+	"vitesee": "mrmcree/vitesse-demo"
 }
