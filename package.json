@@ -11,7 +11,7 @@
   },
   "scripts": {
     "publish": "npm publish --access public",
-    "release": "bumpp --commit --push --tag && npm publish --access public"
+    "release": "bumpp --commit --push --tag && npm run publish"
   },
   "bin": {
     "h5cli": "bin/h5cli",
@@ -20,8 +20,8 @@
     "h5cli-list": "bin/h5cli-list",
     "h5cli-init": "bin/h5cli-init"
   },
-  "name": "@nicoyangcool/h5cli",
-  "version": "1.0.9",
+  "name": "@mrmcree/h5cli",
+  "version": "1.0.10",
   "devDependencies": {},
   "author": "mrmcree",
   "license": "ISC",
