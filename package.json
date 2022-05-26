@@ -6,7 +6,12 @@
     "inquirer": "^6.2.2",
     "log-symbols": "3.0.0",
     "ora": "^3.2.0",
-    "pug": "2.0.3"
+    "pug": "2.0.3",
+    "bumpp": "^7.1.1"
+  },
+  "scripts": {
+    "publish": "npm publish --access public",
+    "release": "bumpp --commit --push --tag && npm publish --access public"
   },
   "bin": {
     "h5cli": "bin/h5cli",
@@ -16,9 +21,9 @@
     "h5cli-init": "bin/h5cli-init"
   },
   "name": "@nicoyangcool/h5cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "devDependencies": {},
-  "author": "",
+  "author": "mrmcree",
   "license": "ISC",
   "description": "",
   "repository": {
