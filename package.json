@@ -6,7 +6,7 @@
     "inquirer": "^6.2.2",
     "log-symbols": "3.0.0",
     "ora": "^3.2.0",
-    "pug": "2.0.3",
+    "pug": "3.0.1",
     "bumpp": "^7.1.1"
   },
   "scripts": {
